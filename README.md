@@ -1,7 +1,8 @@
 ## 更新日志
 
 - **10.12 加入类间nms选项.**  
-在config->dict(rcnn) -> interClass=True 
+在config->dict(rcnn) -> interClass=True  
+模型输出预测结果后会将所有类别的bbox进行nms操作  
 
 ## 
 
