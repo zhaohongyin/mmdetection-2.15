@@ -1,3 +1,10 @@
+## 更新日志
+
+- **10.12 加入类间nms选项.**  
+在config->dict(rcnn) -> interClass=True 
+
+## 
+
 <div align="center">
   <img src="resources/mmdet-logo.png" width="600"/>
 </div>
