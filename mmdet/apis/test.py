@@ -19,6 +19,8 @@ def single_gpu_test(model,
                     out_dir=None,
                     show_score_thr=0.3):
     model.eval()
+    import pdb
+    pdb.set_trace()
     results = []
     dataset = data_loader.dataset
     prog_bar = mmcv.ProgressBar(len(dataset))

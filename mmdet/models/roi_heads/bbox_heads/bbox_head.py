@@ -343,8 +343,15 @@ class BBoxHead(BaseModule):
         if self.custom_cls_channels:
             scores = self.loss_cls.get_activation(cls_score)
         else:
-            scores = F.softmax(
-                cls_score, dim=-1) if cls_score is not None else None
+            # zhy @1108 change for sigmoid test
+            if 'use_sigmoid' in dir(self.loss_cls):
+                if self.loss_cls.use_sigmoid == True:
+                    scores = torch.sigmoid(cls_score)
+                else:
+                    scores = F.softmax(cls_score, dim=-1)
+            else:
+                scores = F.softmax(
+                    cls_score, dim=-1) if cls_score is not None else None
         # bbox_pred would be None in some detector when with_reg is False,
         # e.g. Grid R-CNN.
         if bbox_pred is not None:

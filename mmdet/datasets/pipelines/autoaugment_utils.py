@@ -124,7 +124,6 @@ def policy_v2():
     ]
     return policy
 
-
 def policy_v3():
     """"Additional policy that performs well on object detection."""
     # Each tuple is an augmentation operation of the form
@@ -1581,6 +1580,7 @@ def distort_image_with_autoaugment(image, bboxes, augmentation_name):
     Returns:
         A tuple containing the augmented versions of `image` and `bboxes`.
     """
+    
     available_policies = {
         'v0': policy_v0,
         'v1': policy_v1,

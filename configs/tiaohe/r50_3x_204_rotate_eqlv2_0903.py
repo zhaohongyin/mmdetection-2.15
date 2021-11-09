@@ -203,8 +203,8 @@ checkpoint_config = dict(interval=6)
 log_config = dict(interval=50, hooks=[dict(type='TextLoggerHook')])
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
-load_from = None
+load_from = './work_dir/r50_tiaohe_1020_pretrain/epoch_36.pth'
 resume_from = None
 workflow = [('train', 1)]
-work_dir = None
+work_dir = "./work_dir/r50_tiaohe_1020_finetune"
 gpu_ids = range(0, 4)

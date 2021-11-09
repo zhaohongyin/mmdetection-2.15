@@ -10,7 +10,7 @@ import torch
 from mmcv import Config, DictAction
 from mmcv.runner import get_dist_info, init_dist
 from mmcv.utils import get_git_hash
-
+from mmcv.cnn import ConvModule, bias_init_with_prob, normal_init
 from mmdet import __version__
 from mmdet.apis import set_random_seed, train_detector
 from mmdet.datasets import build_dataset
@@ -68,6 +68,10 @@ def parse_args():
         default='none',
         help='job launcher')
     parser.add_argument('--local_rank', type=int, default=0)
+
+    # zhy add for longtail train
+    parser.add_argument('--longtail', default=False, help='only train cls fc')
+
     args = parser.parse_args()
     if 'LOCAL_RANK' not in os.environ:
         os.environ['LOCAL_RANK'] = str(args.local_rank)
@@ -160,6 +164,18 @@ def main():
         train_cfg=cfg.get('train_cfg'),
         test_cfg=cfg.get('test_cfg'))
     model.init_weights()
+
+    # zhy add for longtail temp for reinit the parameters of cls_fc layer
+    if args.longtail == 'True':
+        # import pdb
+        # pdb.set_trace()
+        for v in model.parameters():
+            v.requires_grad = False
+
+        # bias_cls = bias_init_with_prob(0.01)
+        # normal_init(model.roi_head.bbox_head.fc_cls, std=0.01, bias=bias_cls)
+        model.roi_head.bbox_head.fc_cls.weight.requires_grad = True
+        model.roi_head.bbox_head.fc_cls.bias.requires_grad = True
 
     datasets = [build_dataset(cfg.data.train)]
     if len(cfg.workflow) == 2:

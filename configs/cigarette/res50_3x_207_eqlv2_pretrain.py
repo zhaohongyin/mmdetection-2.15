@@ -117,7 +117,7 @@ data = dict(
     train=dict(
         type='CigaretteDataset',
         ann_file=
-        '/root/wangjinqiao/zhaohongyin/dataset/pretrain8264/train8264.json',
+        '/root/wangjinqiao/zhaohongyin/dataset/pretrain8264/train8264_1019.json',
         img_prefix='/root/wangjinqiao/zhaohongyin/dataset/pretrain8264/jpg',
         pipeline=[
             dict(type='LoadImageFromFile'),
@@ -215,5 +215,5 @@ log_level = 'INFO'
 load_from = None
 resume_from = None
 workflow = [('train', 1)]
-work_dir = './work_dir/res50_faster_207_3x_eqlv2_1012'
+work_dir = './work_dir/res50_faster_207_3x_pretrain-v2_1019'
 gpu_ids = range(0, 4)

@@ -1,6 +1,6 @@
 from .base_roi_head import BaseRoIHead
 from .bbox_heads import (BBoxHead, ConvFCBBoxHead, DIIHead,
-                         DoubleConvFCBBoxHead, SABLHead, SCNetBBoxHead,
+                         DoubleConvFCBBoxHead, SABLHead, SCNetBBoxHead, Shared2FC2ClsBranchBBoxHead,
                          Shared2FCBBoxHead, Shared4Conv1FCBBoxHead)
 from .cascade_roi_head import CascadeRoIHead
 from .double_roi_head import DoubleHeadRoIHead
@@ -21,10 +21,11 @@ from .shared_heads import ResLayer
 from .sparse_roi_head import SparseRoIHead
 from .standard_roi_head import StandardRoIHead
 from .trident_roi_head import TridentRoIHead
+from .extracls_roi_head import ExtraClsRoIHead
 
 __all__ = [
-    'BaseRoIHead', 'CascadeRoIHead', 'DoubleHeadRoIHead', 'MaskScoringRoIHead',
-    'HybridTaskCascadeRoIHead', 'GridRoIHead', 'ResLayer', 'BBoxHead',
+    'BaseRoIHead', 'CascadeRoIHead', 'DoubleHeadRoIHead', 'MaskScoringRoIHead', 'Shared2FC2ClsBranchBBoxHead',
+    'HybridTaskCascadeRoIHead', 'GridRoIHead', 'ResLayer', 'BBoxHead', 'ExtraClsRoIHead',
     'ConvFCBBoxHead', 'DIIHead', 'SABLHead', 'Shared2FCBBoxHead',
     'StandardRoIHead', 'Shared4Conv1FCBBoxHead', 'DoubleConvFCBBoxHead',
     'FCNMaskHead', 'HTCMaskHead', 'FusedSemanticHead', 'GridHead',
