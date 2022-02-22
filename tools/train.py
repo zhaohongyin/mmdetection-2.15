@@ -68,6 +68,8 @@ def parse_args():
         default='none',
         help='job launcher')
     parser.add_argument('--local_rank', type=int, default=0)
+    # frozen the backbone 
+    parser.add_argument('--frozen', default=False, help='only train cls fc')
     args = parser.parse_args()
     if 'LOCAL_RANK' not in os.environ:
         os.environ['LOCAL_RANK'] = str(args.local_rank)
@@ -145,7 +147,14 @@ def main():
     # log some basic info
     logger.info(f'Distributed training: {distributed}')
     logger.info(f'Config:\n{cfg.pretty_text}')
+    
+     if args.frozen == 'True':
+        for v in model.parameters():
+            v.requires_grad = False
+        model.roi_head.bbox_head.fc_cls.weight.requires_grad = True
+        model.roi_head.bbox_head.fc_cls.bias.requires_grad = True
 
+    
     # set random seeds
     if args.seed is not None:
         logger.info(f'Set random seed to {args.seed}, '
